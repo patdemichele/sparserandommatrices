@@ -27,3 +27,6 @@ def Distance1(vector):
     difference = vector - np.ones(np.shape(vector)[0])
     dist = np.linalg.norm(difference)
     return np.power(dist,2)
+
+def Error1(matrix):
+    return Distance1(Project1(matrix))
