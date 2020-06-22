@@ -30,3 +30,24 @@ def Distance1(vector):
 
 def Error1(matrix):
     return Distance1(Project1(matrix))
+
+# d should divide N
+# N/d should divide M, i.e. N should divide M d
+def genFRC(N, M, d):
+    if N % d != 0 or M % (N/d) != 0:
+        print("Warning: uneven groups")
+    n_unique_columns = N//d if N%d==0 else N//d + 1
+    n_per_group = M//n_unique_columns
+    columns = []
+    for group in range(n_unique_columns):
+        column = np.zeros(N)
+        column[group*d : (group+1)*d] = 1
+        n_append = n_per_group
+        if group == n_unique_columns - 1:
+            n_append += M % n_per_group #overflow columns, essentially
+        columns += n_append * [column] # add n_append columns
+    return np.array(columns).T # transpose it because it will be in row form
+        
+        
+
+

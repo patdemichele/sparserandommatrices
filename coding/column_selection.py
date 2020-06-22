@@ -12,3 +12,4 @@ def drop_random(A, p):
     # M by M matrix to select columns
 
 
+
