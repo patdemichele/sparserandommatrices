@@ -49,5 +49,15 @@ def genFRC(N, M, d):
     return np.array(columns).T # transpose it because it will be in row form
         
         
+# Creates a random N x m matrix with exactly
+# d ones in each column
+def genRand(N, m, d):    
+    sample_array = np.zeros(N)
+    sample_array[:d] = 1
+    columns = []    
+    for i in range(m):
+        np.random.shuffle(sample_array)
+        columns += [np.copy(sample_array)]
+    return np.array(columns).T
 
 
