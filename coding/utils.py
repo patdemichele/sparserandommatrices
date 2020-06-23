@@ -60,4 +60,13 @@ def genRand(N, m, d):
         columns += [np.copy(sample_array)]
     return np.array(columns).T
 
-
+# Creates a random N x m matrix with exactly
+# d samples of X ~ [0,1] in each column (all other entries are 0)
+def genRandUniform(N, m, d):    
+    columns = []    
+    for i in range(m):
+        sample_array = np.random.rand(N)
+        sample_array[d:] = 0
+        np.random.shuffle(sample_array)
+        columns += [np.copy(sample_array)]
+    return np.array(columns).T
