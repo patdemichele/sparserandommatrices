@@ -70,3 +70,13 @@ def genRandUniform(N, m, d):
         np.random.shuffle(sample_array)
         columns += [np.copy(sample_array)]
     return np.array(columns).T
+    
+# Creates a random N x m matrix with
+# approximately d ones in each column.
+# M_{ij} ~ Binom(1,d/N) for each i,j
+def genBGC(N, m, d):
+    p = d/N    
+    columns = []    
+    for i in range(m):
+        columns += [np.random.binomial(1, p, N)]
+    return np.array(columns).T
