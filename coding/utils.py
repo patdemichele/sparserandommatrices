@@ -1,6 +1,6 @@
 import numpy as np
 import scipy.linalg
-
+import networkx as nx
 
 # Project1 returns the projection of the 1s vector into 
 # the column space of the input matrix
@@ -80,3 +80,9 @@ def genBGC(N, m, d):
     for i in range(m):
         columns += [np.random.binomial(1, p, N)]
     return np.array(columns).T
+    
+# Creates a random N x N matrix by sampling
+# the set of regular graphs with regularity d and
+# returns the adjacency matrix
+def genRegular(N, d):
+    return nx.to_numpy_matrix(nx.random_regular_graph(d, N))
