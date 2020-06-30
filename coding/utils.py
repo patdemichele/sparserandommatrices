@@ -86,3 +86,12 @@ def genBGC(N, m, d):
 # returns the adjacency matrix
 def genRegular(N, d):
     return nx.to_numpy_matrix(nx.random_regular_graph(d, N))
+    
+# Check # of paths of length 2t (calculates 1_k^T (AA^T)^t 1_k)
+# Calls genBGC to randomly generate A (you may want several samples)
+def pathLength(N, m, d, t):
+    A = genBGC(N, m, d)
+    onesVector = np.ones(N)
+    B = np.matmul(A, A.T)
+    Bt = np.linalg.matrix_power(B, t)
+    return np.matmul(onesVector.T, np.matmul(Bt, onesVector))
