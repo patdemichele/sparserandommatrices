@@ -92,7 +92,6 @@ def genRegular(N, d):
 def test(N,d,p):
      return Error1(drop_random(genRegular(N,d), p))
 
-
 # Check # of paths of length 2t (calculates 1_k^T (AA^T)^t 1_k)
 # Calls genBGC to randomly generate A (you may want several samples)
 def pathLength(N, m, d, t):
