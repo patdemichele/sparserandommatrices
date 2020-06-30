@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.linalg
 import networkx as nx
+from column_selection import drop_random
 
 # Project1 returns the projection of the 1s vector into 
 # the column space of the input matrix
@@ -86,7 +87,11 @@ def genBGC(N, m, d):
 # returns the adjacency matrix
 def genRegular(N, d):
     return nx.to_numpy_matrix(nx.random_regular_graph(d, N))
-    
+
+# generates a d-regular graph on N vertices, drops each column with probability p, reports the error
+def test(N,d,p):
+     return Error1(drop_random(genRegular(N,d), p))
+
 # Check # of paths of length 2t (calculates 1_k^T (AA^T)^t 1_k)
 # Calls genBGC to randomly generate A (you may want several samples)
 def pathLength(N, m, d, t):
