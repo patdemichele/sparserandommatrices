@@ -89,5 +89,10 @@ def genRegular(N, d):
     return nx.to_numpy_matrix(nx.random_regular_graph(d, N))
 
 # generates a d-regular graph on N vertices, drops each column with probability p, reports the error
-def test(N,d,p):
-     return Error1(drop_random(genRegular(N,d), p))
+def test(N,d,p, x, y):
+     s = 0
+     for i in range(y):
+         G = genRegular(N,d)
+         for j in range(x):
+             s += Error1(drop_random(G, p))
+     return s/(x*y)
