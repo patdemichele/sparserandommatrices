@@ -20,7 +20,7 @@ def count_distinct_edges(left_choice, right_choice):
     t = len(right_choice)
     # always right left edge first
     edges = set([(left_choice[i],right_choice[i]) for i in range(t)] +
-                [(left_choice[i+1], left_choice[i]) for i in range(t)])
+                [(left_choice[i+1], right_choice[i]) for i in range(t)])
     return len(edges)
 
 
