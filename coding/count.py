@@ -34,3 +34,11 @@ def path_map(t): # paths from l to l of length 2t
             key = (l_dist, r_dist, distinct_edges)
             result[key] = result.get(key,0) + 1
     return result
+
+def approx_where_r_equals_ck(pm, c): # given a path map and c
+    # recall k on the left, r on the right
+    # (a, b, c) approx k^a r^b (s/k)^c
+    result = {} # will key by power of k, power of s
+    for (a,b,c) in pm:
+        result[(a-c+b, c)] = result.get((a-c+b, c), 0) + pm[(a,b,c)] * c**b
+    return result
