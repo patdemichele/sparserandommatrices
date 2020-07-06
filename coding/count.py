@@ -39,6 +39,6 @@ def approx_where_r_equals_ck(pm, c): # given a path map and c
     # recall k on the left, r on the right
     # (a, b, c) approx k^a r^b (s/k)^c
     result = {} # will key by power of k, power of s
-    for (a,b,c) in pm:
-        result[(a-c+b, c)] = result.get((a-c+b, c), 0) + pm[(a,b,c)] * c**b
+    for (x,y,z) in pm:
+        result[(x-z+y, z)] = result.get((x-z+y, z), 0) + pm[(x,y,z)] * c**y
     return result
