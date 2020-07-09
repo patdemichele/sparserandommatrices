@@ -1,0 +1,56 @@
+## conjecture: given t 0,1 vectors which are linearly independent, there is a vector in their span which is 0,1 and has at least t 1's.
+from numpy.linalg import matrix_rank
+import numpy as np
+from copy import copy
+import scipy.linalg
+
+def gen_t_tuples(N,t):
+    if t == 0:
+        return set([(0,)*N])
+    one_less = gen_t_tuples(N, t-1)
+    results = set()
+    for tup in one_less:
+        for i in range(N):
+            if tup[i] == 0:
+                results.add(tup[:i] + (1,) + tup[i+1:])
+    return results
+
+def gen_t_arrays(N,t):
+    tuples = gen_t_tuples(N,t)
+    results = []
+    for tup in tuples:
+        results.append(np.array(tup))
+    return results
+
+def gen_at_least_t(N,t):
+    results = []
+    for i in range(t,N+1):
+        results += gen_t_arrays(N,i)
+    return results
+
+def in_span_of(v, mat):
+    basis = scipy.linalg.orth(mat)
+    for col in range(mat.shape[1]):
+        column = mat[:,col]
+        v -= column * np.dot(v,column)
+    return np.dot(v,v) < 1e-10
+
+def test_conjecture(N, t, distribution, n_trials):
+    test_vectors = gen_t_arrays(N,t)
+    for trial in range(n_trials):
+        vectors = []
+        for i in range(t):
+            vectors.append(distribution()) # draw from distribution
+            mat = np.transpose(np.array(vectors))
+            if matrix_rank(mat) < t:
+                print("Inconclusive")
+                continue
+            found = False
+            for v in gen_at_least_t(N,t):
+                if in_span_of(v, mat):
+                    found = True
+            if not found:
+                print("Conjecture is False!")
+            else:
+                print("Tentatively True")
+        
