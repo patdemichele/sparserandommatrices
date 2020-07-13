@@ -76,7 +76,7 @@ def genRandUniform(N, m, d):
 # approximately d ones in each column.
 # M_{ij} ~ Binom(1,d/N) for each i,j
 def genBGC(N, m, d):
-    p = d/N    
+    p = d*1.0/N    
     columns = []    
     for i in range(m):
         columns += [np.random.binomial(1, p, N)]
