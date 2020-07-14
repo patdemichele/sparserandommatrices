@@ -100,3 +100,15 @@ def pathLength(N, m, d, t):
     B = np.matmul(A, A.T)
     Bt = np.linalg.matrix_power(B, t)
     return np.matmul(onesVector.T, np.matmul(Bt, onesVector))
+
+
+
+def genRowUniform(N, m, d): # note: d is the number of 1's per /row/ not column.
+    lrows = []
+    for i in range(N):
+        r = np.zeros(m)
+        while np.sum(r) != d:
+            r = np.random.binomial(1, d*1.0/m, N)
+        lrows.append(r)
+    return np.array(lrows)
+
